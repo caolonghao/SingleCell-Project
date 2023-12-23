@@ -13,6 +13,7 @@ import mudata
 import numpy as np
 import pandas as pd
 import torch
+import torch.nn.functional as F
 
 from dance.data import Data
 from dance.datasets.multimodality import ModalityPredictionDataset
@@ -85,6 +86,7 @@ def pipeline(inductive=False, verbose=2, logger=None, **kwargs):
         model.fit(g, y_train, split, not inductive, verbose, y_test, logger)
 
     model_output = model.predict(g, np.arange(kwargs["TRAIN_SIZE"], kwargs["CELL_SIZE"]), device="cpu")
+    model_output = F.relu(model_output)
     
     # accumulator = []
     # accumulator.append({'rmse': model.score(g, np.arange(kwargs["TRAIN_SIZE"], kwargs["CELL_SIZE"]), y_test, device="cpu"),
