@@ -1,0 +1,131 @@
+{'prefix': 'dance_openproblems_bmmc_atac2rna_test', 'root': './data', 'subtask': 'openproblems_bmmc_cite_phase2_rna', 'pathway_weight': 'pearson', 'pathway_threshold': -1.0, 'log_folder': './logs', 'model_folder': './models', 'result_folder': './results', 'epoch': 20, 'no_batch_features': False, 'pathway': False, 'residual': 'res_cat', 'initial_residual': False, 'pathway_aggregation': 'alpha', 'pathway_alpha': 0.25, 'no_readout_concatenate': False, 'batch_size': 1000, 'normalization': 'group', 'activation': 'gelu', 'embedding_layers': 1, 'readout_layers': 1, 'conv_layers': 4, 'agg_function': 'mean', 'device': 'cuda', 'save_best': False, 'save_final': False, 'learning_rate': 0.01, 'lr_decay': 0.99, 'weight_decay': 1e-05, 'hidden_size': 48, 'edge_dropout': 0.3, 'model_dropout': 0.2, 'early_stopping': 200, 'cpu': 1, 'output_relu': 'none', 'subpath_activation': False, 'cell_init': 'none', 'batch_seperation': False, 'pathway_path': './data/h.all.v7.4', 'seed': 1, 'runs': 1, 'weighted_sum': False, 'sampling': False, 'node_sampling_rate': 0.5, 'preprocessing': 'none', 'low_memory': False, 'FEATURE_SIZE': 13953, 'TRAIN_SIZE': 66175, 'OUTPUT_SIZE': 134, 'CELL_SIZE': 67175, 'BATCH_NUM': 9}
+ScMoGCN(
+  (extra_encoder): Linear(in_features=9, out_features=48, bias=True)
+  (embed_cell): Embedding(2, 48)
+  (embed_feat): Embedding(13953, 48)
+  (input_linears): ModuleList()
+  (input_acts): ModuleList()
+  (input_norm): ModuleList()
+  (conv_layers): ModuleList(
+    (0): HeteroGraphConv(
+      (mods): ModuleDict(
+        (feature2cell): SAGEConv(
+          (feat_drop): Dropout(p=0.0, inplace=False)
+          (fc_neigh): Linear(in_features=48, out_features=48, bias=False)
+          (fc_self): Linear(in_features=48, out_features=48, bias=True)
+        )
+        (cell2feature): SAGEConv(
+          (feat_drop): Dropout(p=0.0, inplace=False)
+          (fc_neigh): Linear(in_features=48, out_features=48, bias=False)
+          (fc_self): Linear(in_features=48, out_features=48, bias=True)
+        )
+      )
+    )
+    (1-3): 3 x HeteroGraphConv(
+      (mods): ModuleDict(
+        (feature2cell): SAGEConv(
+          (feat_drop): Dropout(p=0.0, inplace=False)
+          (fc_neigh): Linear(in_features=96, out_features=48, bias=False)
+          (fc_self): Linear(in_features=96, out_features=48, bias=True)
+        )
+        (cell2feature): SAGEConv(
+          (feat_drop): Dropout(p=0.0, inplace=False)
+          (fc_neigh): Linear(in_features=96, out_features=48, bias=False)
+          (fc_self): Linear(in_features=96, out_features=48, bias=True)
+        )
+      )
+    )
+  )
+  (conv_acts): ModuleList(
+    (0-7): 8 x GELU(approximate='none')
+  )
+  (conv_norm): ModuleList(
+    (0-7): 8 x GroupNorm(4, 48, eps=1e-05, affine=True)
+  )
+  (att_linears): ModuleList()
+  (readout_linears): ModuleList(
+    (0): Linear(in_features=192, out_features=134, bias=True)
+  )
+  (readout_acts): ModuleList()
+)
+epoch:  0
+training loss:  1.0899544936488876
+validation loss:  0.7407986948292236
+testing loss:  0.8331796305688776
+epoch:  1
+training loss:  0.7909062816257072
+validation loss:  0.6772398669913032
+testing loss:  0.6847807469632264
+epoch:  2
+training loss:  0.7049208700804305
+validation loss:  0.6491603958217127
+testing loss:  0.6935801409791098
+epoch:  3
+training loss:  0.6872729446699551
+validation loss:  0.6390799056016907
+testing loss:  0.7189082510509305
+epoch:  4
+training loss:  0.6737848682616917
+validation loss:  0.618927229920791
+testing loss:  0.6771890826662279
+epoch:  5
+training loss:  0.6468563335139595
+validation loss:  0.617291864190621
+testing loss:  0.6632962237533697
+epoch:  6
+training loss:  0.643988710421475
+validation loss:  0.6081677974762897
+testing loss:  0.6715589711561188
+epoch:  7
+training loss:  0.6341273693594647
+validation loss:  0.6037874813173889
+testing loss:  0.6794596103667051
+epoch:  8
+training loss:  0.6287016209898338
+validation loss:  0.6016386405021454
+testing loss:  0.6715563306707046
+epoch:  9
+training loss:  0.6241378798635128
+validation loss:  0.6015058961469905
+testing loss:  0.6640058381085373
+epoch:  10
+training loss:  0.6217552117611296
+validation loss:  0.5969507628684805
+testing loss:  0.661881354124063
+epoch:  11
+training loss:  0.6156847319695155
+validation loss:  0.5933494471610337
+testing loss:  0.6660051988249851
+epoch:  12
+training loss:  0.6111413347351667
+validation loss:  0.5931347620877204
+testing loss:  0.6682539660003944
+epoch:  13
+training loss:  0.6097101854711447
+validation loss:  0.5929020046218257
+testing loss:  0.6620487646757606
+epoch:  14
+training loss:  0.6085046764216026
+validation loss:  0.5925585185901865
+testing loss:  0.6544058182390101
+epoch:  15
+training loss:  0.6069412046831474
+validation loss:  0.5908885569605987
+testing loss:  0.6524816812669623
+epoch:  16
+training loss:  0.60450014962667
+validation loss:  0.5886724096142646
+testing loss:  0.6570245168660696
+epoch:  17
+training loss:  0.6015942800475029
+validation loss:  0.5877059190121994
+testing loss:  0.662123328317898
+epoch:  18
+training loss:  0.60022189884906
+validation loss:  0.5869786485626272
+testing loss:  0.6614298751796726
+epoch:  19
+training loss:  0.5988048163230499
+validation loss:  0.5864033944893645
+testing loss:  0.6571436201929318
+epoch 19 minimal val 0.5864033944893645 with training:  0.5988048163230499 and testing: 0.6571436201929318
