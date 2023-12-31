@@ -1,0 +1,2 @@
+subtask,rmse,mae,emb_layer,readout_layer,conv_layers,agg_function,seed
+openproblems_bmmc_cite_phase2_mod2,0.3203177750110626,0.15543100237846375,1,2,3,mean,3407
