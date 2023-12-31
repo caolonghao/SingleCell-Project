@@ -7,4 +7,6 @@ __pycache__/
 # data
 sample_data/
 *.h5ad
-
+experiment_results/
+logs/
+.vscode/

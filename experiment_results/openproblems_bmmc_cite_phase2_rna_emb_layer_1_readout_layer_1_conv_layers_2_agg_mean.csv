@@ -1,0 +1,3 @@
+subtask,rmse,mae,emb_layer,readout_layer,conv_layers,agg_function,seed
+openproblems_bmmc_cite_phase2_rna,0.41559046506881714,0.2820891737937927,1,1,2,mean,3407
+openproblems_bmmc_cite_phase2_rna,0.411867618560791,0.27950775623321533,1,1,2,mean,3407
