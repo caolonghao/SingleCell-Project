@@ -29,6 +29,7 @@ def pipeline(inductive=False, verbose=2, logger=None, **kwargs):
     os.makedirs(kwargs["model_folder"], exist_ok=True)
     os.makedirs(kwargs["result_folder"], exist_ok=True)
 
+    
     subtask = kwargs["subtask"]
     dataset = ModalityPredictionDataset(subtask, root=kwargs['root'], preprocess=kwargs["preprocessing"])
     dataset.download_pathway()
@@ -42,6 +43,9 @@ def pipeline(inductive=False, verbose=2, logger=None, **kwargs):
     train_size = modalities[0].shape[0]
     data = Data(mdata, train_size=train_size)
     data.set_config(feature_mod="mod1", label_mod="mod2")
+
+    # import pdb
+    # pdb.set_trace()
 
     data = ScMoGNNGraph(inductive, kwargs["cell_init"], kwargs["pathway"], kwargs["subtask"], kwargs["pathway_weight"],
                         kwargs["pathway_threshold"], kwargs["pathway_path"])(data)
@@ -126,6 +130,19 @@ def main(args):
     if config["write_result"]:
         pd.DataFrame([result]).to_csv(config["output"].replace("h5ad","csv"))
     
+    # save results into file along with layer number configuration
+    output_dir = 'experiment_results'
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    exp_name = f'{args.subtask}_emb_layer_{args.embedding_layers}_readout_layer_{args.readout_layers}_conv_layers_{args.conv_layers}_agg_{args.agg_function}'
+    output_file = f'{output_dir}/{exp_name}.csv'
+    if not os.path.exists(output_file):
+        with open(output_file, 'w') as f:
+            f.write('subtask,rmse,mae,emb_layer,readout_layer,conv_layers,agg_function,seed\n')
+    with open(output_file, 'a') as f:
+        f.write(f'{args.subtask},{result["RMSE"]},{result["MAE"]},{args.embedding_layers},{args.readout_layers},{args.conv_layers},{args.agg_function},{args.seed}\n')
+
     return result
 
 if __name__ == "__main__":
@@ -171,7 +188,7 @@ if __name__ == "__main__":
     parser.add_argument("-ci", "--cell_init", default="none", choices=["none", "svd"])
     parser.add_argument("-bas", "--batch_seperation", action="store_true")
     parser.add_argument("-pwpath", "--pathway_path", default="./data/h.all.v7.4")
-    parser.add_argument("-seed", "--seed", type=int, default=1)
+    parser.add_argument("-seed", "--seed", type=int, default=3407)
     parser.add_argument("--runs", type=int, default=1, help="Number of repetitions")
     parser.add_argument("-ws", "--weighted_sum", action="store_true")
     parser.add_argument("-samp", "--sampling", action="store_true")
