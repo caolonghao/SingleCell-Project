@@ -1,6 +1,6 @@
 # config.py
 
-subtask = 'openproblems_bmmc_cite_phase2_mod2'
+subtask = 'openproblems_bmmc_multiome_phase2_mod2'
 
 config = {
     'input_train_mod1': f'./data/{subtask}/{subtask}.censor_dataset.output_train_mod1.h5ad',
